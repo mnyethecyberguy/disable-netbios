@@ -1,4 +1,3 @@
-
 <#
     .SYNOPSIS
     This PowerShell script will disable NetBIOS on all network interfaces.
@@ -17,13 +16,13 @@
     .EXAMPLE
 
     .NOTES
-    ###############################################################################################
-    # Author: Michael Nye - https://github.com/mnyethecyberguy                                    #
-    # Project: Disable-NetBios - Michael Nye - https://github.com/mnyethecyberguy/disable-netbios #
-    # Module Dependencies: ActiveDirectory                                                        #
-    # Permission level: Local Admin                                                               #
-    # Powershell v5 or greater                                                                    #
-    ###############################################################################################
+    #################################################################################
+    # Author: Michael Nye - https://github.com/mnyethecyberguy                      #
+    # Project: Disable-NetBios - https://github.com/mnyethecyberguy/disable-netbios #
+    # Module Dependencies: ActiveDirectory                                          #
+    # Permission level: Local Admin                                                 #
+    # Powershell v5 or greater                                                      #
+    #################################################################################
 #>
 
 param (
@@ -36,6 +35,9 @@ param (
     [Parameter()]
     [string]$SearchRoot
 )
+
+# ------------------- IMPORT AD MODULE (IF NEEDED) ------------------------
+Import-Module ActiveDirectory
 
 if ($Remote.IsPresent) {
     $computer = Get-ADComputer -SearchBase $SearchRoot -Filter * | Select-Object -ExpandProperty Name
