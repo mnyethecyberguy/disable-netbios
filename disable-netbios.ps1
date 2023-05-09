@@ -40,7 +40,7 @@ param (
 if ($Remote.IsPresent) {
     $computer = Get-ADComputer -SearchBase $SearchRoot -Filter * | Select-Object -ExpandProperty Name
     Invoke-Command -ComputerName $computer -ScriptBlock {
-        $adapters = (gwmi win32_networkadapterconfiguration)
+        $adapters = (Get-WmiObject win32_networkadapterconfiguration)
         foreach ($adapter in $adapters){
             Write-Host $adapter
             $adapter.settcpipnetbios(2) # 1 is enable 2 is disable
@@ -49,7 +49,7 @@ if ($Remote.IsPresent) {
 }
 
 if ($Local.IsPresent) {
-    $localadapters = (gwmi win32_networkadapterconfiguration)
+    $localadapters = (Get-WmiObject win32_networkadapterconfiguration)
     foreach ($localadapter in $localadapters){
         Write-Host $localadapter
         $localadapter.settcpipnetbios(2) # 1 is enable 2 is disable
